@@ -10,6 +10,9 @@ LIST(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake_modules)
 find_package(catkin REQUIRED COMPONENTS cv_bridge geometry_msgs rosbag
     roscpp sensor_msgs std_msgs )
 
+set(CMAKE_BUILD_TYPE Release)
+set(CMAKE_CXX_FLAGS_RELEASE "-g -O3")
+
 catkin_package(
 		INCLUDE_DIRS include
 		CATKIN_DEPENDS cv_bridge geometry_msgs rosbag roscpp sensor_msgs std_msgs
@@ -46,4 +49,7 @@ target_link_libraries(gopro_to_asl ${PROJECT_NAME} ${catkin_LIBRARIES})
 
 add_executable(gopro_to_rosbag gopro_to_rosbag.cpp)
 target_link_libraries(gopro_to_rosbag ${PROJECT_NAME} ${catkin_LIBRARIES})
+
+add_executable(gopro2rosbag gopro2rosbag.cpp)
+target_link_libraries(gopro2rosbag ${PROJECT_NAME} ${catkin_LIBRARIES} spdlog)
 
